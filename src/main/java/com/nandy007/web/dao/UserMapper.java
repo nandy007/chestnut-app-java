@@ -1,0 +1,7 @@
+package com.nandy007.web.dao;
+
+import com.nandy007.web.core.Mapper;
+import com.nandy007.web.model.User;
+
+public interface UserMapper extends Mapper<User> {
+}
