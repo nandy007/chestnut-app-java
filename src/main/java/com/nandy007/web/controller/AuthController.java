@@ -2,6 +2,7 @@ package com.nandy007.web.controller;
 
 import com.nandy007.web.core.Result;
 import com.nandy007.web.core.ResultGenerator;
+import com.nandy007.web.model.SessionInfo;
 import com.nandy007.web.model.User;
 // import com.nandy007.web.model.UserAuthority;
 import com.nandy007.web.secruity.JwtAuthenticationRequest;
@@ -9,6 +10,7 @@ import com.nandy007.web.secruity.JwtAuthenticationRequest;
 import com.nandy007.web.service.UserService;
 // import com.github.pagehelper.PageHelper;
 // import com.github.pagehelper.PageInfo;
+import com.nandy007.web.utils.SessionUtil;
 
 import io.swagger.annotations.Api;
 // import io.swagger.annotations.ApiImplicitParam;
@@ -48,6 +50,10 @@ public class AuthController {
     @RequestMapping(method = RequestMethod.POST,value="/login")
     public Result createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest){
         final String token = authService.login(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        SessionInfo sessionInfo = new SessionInfo();
+        sessionInfo.setToken(token);
+        sessionInfo.setUsername(authenticationRequest.getUsername());
+        SessionUtil.setSessionInfo(sessionInfo);
 
         return ResultGenerator.genSuccessResult(token);
 

@@ -10,10 +10,16 @@ public class StaticConfig {
  
     @Value("${server.port}")
     private String serverPort;
+
+
+    @Value("${session.timeout}")
+    private Integer sessionTimeout;
+
  
     @Bean
     public int initStatic() {
         StaticHelper.setServerPort(serverPort);
+        StaticHelper.setSessionTimeout(sessionTimeout);
         return 0;
     }
 }

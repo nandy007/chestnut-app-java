@@ -6,6 +6,7 @@ import com.nandy007.web.model.User;
 // import com.nandy007.web.model.UserAuthority;
 import com.nandy007.web.service.UserAuthorityService;
 import com.nandy007.web.service.UserService;
+import com.nandy007.web.utils.SessionUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -20,6 +21,9 @@ import javax.annotation.Resource;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
 * Created by CodeGenerator on 2017/10/26.
 */
@@ -27,6 +31,9 @@ import java.util.List;
 @RequestMapping("/user")
 @Api(value = "UserController" ,description="用户相关API")
 public class UserController {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Resource
     private UserService userService;
     
@@ -74,10 +81,10 @@ public class UserController {
     @GetMapping
     // public Result list(@RequestAttribute String username, @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+        logger.info("sessionId:" + SessionUtil.get("token"));
         PageHelper.startPage(page, size);
         List<User> list = userService.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        // pageInfo.setOrderBy(username);
         return ResultGenerator.genSuccessResult(pageInfo);
     }
 }
