@@ -54,6 +54,9 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
 
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+        // 将static目录作为静态文件目录
+        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
     }
 
     //使用阿里 FastJson 作为JSON MessageConverter
@@ -110,12 +113,16 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**");
     }
+
+    private boolean isValidSign(){
+        return !"dev".equals(env) && !useSession;
+    }
    
     //添加拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //接口签名认证拦截器，该签名认证比较简单，实际项目中可以使用Json Web Token或其他更好的方式替代。
-        if (!"dev".equals(env) && !useSession) { //开发环境 并且使用session 时忽略签名认证
+        if (isValidSign()) { //开发环境 并且使用session 时忽略签名认证
             registry.addInterceptor(new HandlerInterceptorAdapter() {
                 @Override
                 public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
