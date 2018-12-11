@@ -6,6 +6,24 @@ public class StaticHelper{
     private static String serverPort;
     private static Integer sessionTimeout;
     private static RedisUtil redisUtil;
+    private static String sessionId;
+
+
+    
+
+    /**
+     * @return the sessionId
+     */
+    public static String getSessionId() {
+        return sessionId;
+    }
+
+    /**
+     * @param sessionId the sessionId to set
+     */
+    public static void setSessionId(String sessionId) {
+        StaticHelper.sessionId = sessionId;
+    }
 
 
     /**

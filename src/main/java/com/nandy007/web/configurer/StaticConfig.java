@@ -15,11 +15,15 @@ public class StaticConfig {
     @Value("${session.timeout}")
     private Integer sessionTimeout;
 
+    @Value("${session.id}")
+    private String sessionId;
+
  
     @Bean
     public int initStatic() {
         StaticHelper.setServerPort(serverPort);
         StaticHelper.setSessionTimeout(sessionTimeout);
+        StaticHelper.setSessionId(sessionId);
         return 0;
     }
 }

@@ -6,6 +6,7 @@ import com.nandy007.web.model.SessionInfo;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -54,7 +55,7 @@ public class SessionUtil {
             throwError();
         }
         request.getSession().setAttribute("authToken", token);
-        String sessionId = MD5Util.MD5Encode(token);
+        String sessionId = StaticHelper.getSessionId() + ":" + MD5Util.MD5Encode(token);
         return sessionId;
     }
 
