@@ -8,6 +8,7 @@ import com.nandy007.web.model.User;
 import com.nandy007.web.secruity.JwtAuthenticationRequest;
 // import com.nandy007.web.service.UserAuthorityService;
 import com.nandy007.web.service.UserService;
+import com.nandy007.web.utils.DataBaseUtil;
 // import com.github.pagehelper.PageHelper;
 // import com.github.pagehelper.PageInfo;
 import com.nandy007.web.utils.SessionUtil;
@@ -17,6 +18,7 @@ import io.swagger.annotations.Api;
 // import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
+import org.apache.commons.dbutils.OutParameter;
 // import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 // import org.springframework.http.ResponseEntity;
@@ -27,10 +29,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Types;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-// import java.util.List;
 
 /**
 * Created by CodeGenerator on 2017/10/26.
