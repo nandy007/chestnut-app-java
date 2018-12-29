@@ -55,8 +55,12 @@ public class SessionUtil {
             throwError();
         }
         request.getSession().setAttribute("authToken", token);
-        String sessionId = StaticHelper.getSessionId() + ":" + MD5Util.MD5Encode(token);
+        String sessionId = createSessionId(token);
         return sessionId;
+    }
+
+    private static String createSessionId(String token){
+        return StaticHelper.getSessionId() + ":" + MD5Util.MD5Encode(token);
     }
 
 
@@ -68,7 +72,7 @@ public class SessionUtil {
             throwError();
         }
 
-        String sessionId = MD5Util.MD5Encode(token);
+        String sessionId = createSessionId(token);
 
         return sessionId;
     }

@@ -107,19 +107,19 @@ public class RedisConfig {
      */
     @Bean
     public JedisConnectionFactory JedisConnectionFactory(JedisPoolConfig jedisPoolConfig){
-        JedisConnectionFactory JedisConnectionFactory = new JedisConnectionFactory(jedisPoolConfig);
+        JedisConnectionFactory factory = new JedisConnectionFactory();
         //连接池  
-        JedisConnectionFactory.setPoolConfig(jedisPoolConfig);  
+        factory.setPoolConfig(jedisPoolConfig);  
         //IP地址  
-        JedisConnectionFactory.setHostName(hostName);  
+        factory.setHostName(hostName);  
         //端口号  
-        JedisConnectionFactory.setPort(port);  
+        factory.setPort(port);  
         //如果Redis设置有密码  
         //JedisConnectionFactory.setPassword(password);  
         //客户端超时时间单位是毫秒  
-        JedisConnectionFactory.setTimeout(timeout);  
+        factory.setTimeout(timeout);  
         
-        return JedisConnectionFactory; 
+        return factory; 
     }
 
     /**
